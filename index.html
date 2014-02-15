@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Quelpa by quelpa</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/quelpa/quelpa">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/quelpa/quelpa/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/quelpa/quelpa/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Quelpa</h1>
+          <p>Your personal local Emacs Lisp Package Archive (ELPA) with packages built on-the-fly directly from source</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/quelpa">quelpa</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a name="quelpa" class="anchor" href="#quelpa"><span class="octicon octicon-link"></span></a>quelpa</h1>
+
+<p>Your personal local Emacs Lisp Package Archive (ELPA) with packages built on-the-fly directly from source.</p>
+
+<p><strong>Important: quelpa requires at least Emacs 24.3</strong></p>
+
+<p>If you want to help with the development of quelpa, check the <a href="https://github.com/quelpa/quelpa/issues">issues.</a> The more people we get to work on quelpa, the better :)</p>
+
+<h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
+
+<p><code>quelpa</code> wants to bring the power over your Emacs packages back to you. The <a href="http://melpa.milkbox.net/packages/">melpa</a> archive is great because it has so many packages but why should an external build service control what packages you can install?</p>
+
+<p>Rather <code>quelpa</code> uses recipes in the <a href="https://github.com/milkypostman/melpa#recipe-format">melpa-format</a> to build the packages you want from the source code and installs them to a directory-based local package archive that we call <code>quelpa</code>.</p>
+
+<p>You can build and install packages from all the sources the melpa build script (<code>package-build</code>) supports:</p>
+
+<ul>
+<li>  git: <a href="http://git-scm.com/">http://git-scm.com/</a>
+</li>
+<li>  github: <a href="https://github.com/">https://github.com/</a>
+</li>
+<li>  bazaar (bzr): <a href="http://bazaar.canonical.com/en/">http://bazaar.canonical.com/en/</a>
+</li>
+<li>  mercurial (hg): <a href="http://mercurial.selenic.com/">http://mercurial.selenic.com/</a>
+</li>
+<li>  subversion (svn): <a href="http://subversion.apache.org/">http://subversion.apache.org/</a>
+</li>
+<li>  cvs: <a href="http://www.nongnu.org/cvs/">http://www.nongnu.org/cvs/</a>
+</li>
+<li>  darcs: <a href="http://darcs.net/">http://darcs.net/</a>
+</li>
+<li>  Emacs Wiki (wiki): <a href="http://www.emacswiki.org/">http://www.emacswiki.org/</a>
+</li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>First <code>quelpa</code> needs to be bootstrapped, that means melpa's <code>package-build</code> has to be installed, then <code>quelpa</code> itself.</p>
+
+<p>To bootstrap <code>quelpa</code>  use this code:</p>
+
+<div class="highlight highlight-lisp"><pre>    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">require</span> <span class="ss">'quelpa</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">with-temp-buffer</span>
+        <span class="p">(</span><span class="nv">url-insert-file-contents</span> <span class="s">"https://raw.github.com/quelpa/quelpa/master/bootstrap.el"</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">eval-buffer</span><span class="p">)))</span>
+</pre></div>
+
+<p>To bootstrap <code>quelpa</code> now just evaluate this expression in your <code>*scratch*</code> buffer. Add it to your Emacs init file to make sure <code>quelpa</code> will be installed automatically if necessary.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Cool. Now that we are all setup enjoy the ride.</p>
+
+<p>Navigate to <a href="http://melpa.milkbox.net/">http://melpa.milkbox.net/</a> and click on the recipe symbol of a package you'd like to install. Or go directly to <a href="https://github.com/milkypostman/melpa/blob/master/recipes/">https://github.com/milkypostman/melpa/blob/master/recipes/</a> and choose a recipe there.</p>
+
+<p>In this example I use <code>company</code>, the alternative auto-completion framework at <a href="https://github.com/milkypostman/melpa/blob/master/recipes/company">https://github.com/milkypostman/melpa/blob/master/recipes/company</a>:</p>
+
+<div class="highlight highlight-lisp"><pre>    <span class="p">(</span><span class="nv">company</span> <span class="ss">:repo</span> <span class="s">"company-mode/company-mode"</span> <span class="ss">:fetcher</span> <span class="nv">github</span><span class="p">)</span>
+</pre></div>
+
+<p>Now installing <code>company</code> from the Github source with <code>quelpa</code> is pretty simple:</p>
+
+<div class="highlight highlight-lisp"><pre>    <span class="p">(</span><span class="nv">quelpa</span> <span class="o">'</span><span class="p">(</span><span class="nv">company</span> <span class="ss">:repo</span> <span class="s">"company-mode/company-mode"</span> <span class="ss">:fetcher</span> <span class="nv">github</span><span class="p">))</span>
+</pre></div>
+
+<p>Just take care that you put a quote before the recipe. Running this expression will fetch the source code from Github, build a package in elpa format and put it into the local <code>quelpa</code>  packages directory <code>~/.emacs.d/quelpa/packages</code>. The package is installed via the normal <code>package-install</code> command behind the scenes.</p>
+
+<p>You can also use the package management interface with <code>quelpa</code> . Just start <code>M-x list-packages</code> and work with your packages as you normally do.</p>
+
+<p>That's currently all folks. More bling to come!</p>
+
+<h2>
+<a name="why-quelpa" class="anchor" href="#why-quelpa"><span class="octicon octicon-link"></span></a>Why "quelpa"?</h2>
+
+<p>German <code>Quelle</code> means <code>source</code>, <code>Quellcode</code> means <code>source code</code> and <code>ELPA</code> is short for Emacs Lisp Package Archive, you get the idea. So <code>quelpa</code> is your package archive with packages built from source.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
